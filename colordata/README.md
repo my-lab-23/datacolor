@@ -1,0 +1,3 @@
+# colordata
+
+App per MyRGB.
