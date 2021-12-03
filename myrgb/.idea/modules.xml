@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/crispy-pancake.iml" filepath="$PROJECT_DIR$/.idea/modules/crispy-pancake.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/crispy-pancake-build.iml" filepath="$PROJECT_DIR$/.idea/modules/crispy-pancake-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MyRGB.iml" filepath="$PROJECT_DIR$/.idea/modules/MyRGB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MyRGB-build.iml" filepath="$PROJECT_DIR$/.idea/modules/MyRGB-build.iml" />
     </modules>
   </component>
 </project>

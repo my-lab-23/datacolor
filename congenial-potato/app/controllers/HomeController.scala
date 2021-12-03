@@ -45,4 +45,9 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     MyIndex.update_rgb_list()
     Ok(views.html.due())
   }
+
+  def final_combo() = Action { implicit request: Request[AnyContent] =>
+    MyIndex.final_combo()
+    Ok(views.html.final_combo())
+  }
 }
