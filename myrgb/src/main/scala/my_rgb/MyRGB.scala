@@ -62,11 +62,17 @@ object MyRGB {
    //
 
    def average_combo(): List[String] = {
-      val rgb_list_csv = MyUtility.read_file("/home/ema/data/rgb.txt")
+      val rgb_list_csv = MyUtility.read_file(s"$path/rgb.txt")
+      val rgb_list_last9 = rgb_list_csv.take(9)
+
       var splitted = ListBuffer[List[String]]()
 
-      for(l <- rgb_list_csv) {
+      for(l <- rgb_list_last9) {
          splitted += l.split(",").toList
+      }
+
+      for(l <- splitted) {
+         println(l)
       }
 
       var pari = ListBuffer[String]()
@@ -82,9 +88,6 @@ object MyRGB {
       val color1 = MyRGB.average_rgb_list(pari.toList)
       val color2 = MyRGB.average_rgb_list(dispari.toList)
 
-      println(color1)
-      println(color2)
-
       List(color1, color2)
    }
 
@@ -97,7 +100,6 @@ object MyRGB {
 
       val m1 = List(l0.head, l1.head, l2.head).min
       val m2 = List(l0(1), l1(1), l2(1)).min
-      println(s"--- $m1 - $m2 ---")
 
       def replace_min(x: Int): Int = {
          if(x==m1 || x==m2 ) { 0 }
@@ -107,7 +109,6 @@ object MyRGB {
       val res0 = ril.head.map(replace_min)
       val res1 = ril(1).map(replace_min)
       val res2 = ril(2).map(replace_min)
-      println(s"$res0 - $res1 - $res2")
 
       val result1 = MyRGBAux.int_to_hex_string(List(res0.head, res1.head, res2.head))
       val result2 = MyRGBAux.int_to_hex_string(List(res0(1), res1(1), res2(1)))

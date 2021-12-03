@@ -21,13 +21,11 @@ object MyRGBAux {
          r += l(1).toString + l(2).toString
          g += l(2).toString + l(3).toString
          b += l(4).toString + l(5).toString
-         println(s"$r - $g - $b")
       }
 
       val rI = r.map(this.convertHexStringToInt)
       val gI = g.map(this.convertHexStringToInt)
       val bI = b.map(this.convertHexStringToInt)
-      println(s"$rI - $gI - $bI")
 
       List(rI.toList, gI.toList, bI.toList)
    }
@@ -46,7 +44,6 @@ object MyRGBAux {
       val resR = this.convertIntToHexString(rgb_int.head).replace("0", "00")
       val resG = this.convertIntToHexString(rgb_int(1)).replace("0", "00")
       val resB = this.convertIntToHexString(rgb_int(2)).replace("0", "00")
-      println(s"$resR - $resG - $resB")
 
       val result = s"#$resR$resG$resB"
       result
