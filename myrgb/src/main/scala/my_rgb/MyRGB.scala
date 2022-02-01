@@ -60,9 +60,11 @@ object MyRGB {
          powered_colors.addOne(powered)
       }
 
-      val sum1 = powered_colors.head.sum/2
-      val sum2 = powered_colors(1).sum/2
-      val sum3 = powered_colors(2).sum/2
+      val n_colors = powered_colors.head.length
+
+      val sum1 = powered_colors.head.sum/n_colors
+      val sum2 = powered_colors(1).sum/n_colors
+      val sum3 = powered_colors(2).sum/n_colors
 
       val res1 = MyRGBAux.convertIntToHexString(sum1.sqrt())
       val res2 = MyRGBAux.convertIntToHexString(sum2.sqrt())
@@ -84,7 +86,7 @@ object MyRGB {
       }
 
       for(l <- splitted) {
-         println(l)
+         //println(l)
       }
 
       val pari = ListBuffer[String]()
