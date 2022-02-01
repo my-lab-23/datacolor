@@ -8,26 +8,37 @@ object MyRGBAux {
       Integer.parseInt(hexString, 16)
    }
 
-   private def convertIntToHexString(n: Int): String = {
-      Integer.toHexString(n)
+   def convertIntToHexString(n: Int): String = {
+      val s = Integer.toHexString(n)
+
+      if(s.length == 1) { s"0$s" }
+      else { s }
    }
 
-   def split_hex_to_int(rgb_list: List[String]): List[List[Int]] = {
-      var r = ListBuffer[String]()
-      var g = ListBuffer[String]()
-      var b = ListBuffer[String]()
+   def split_hex_to_int(colors: List[String]): List[List[Int]] = {
 
-      for(l <- rgb_list) {
-         r += l(1).toString + l(2).toString
-         g += l(2).toString + l(3).toString
-         b += l(4).toString + l(5).toString
+      val result = ListBuffer[List[Int]]()
+
+      val reds = ListBuffer[Int]()
+      val greens = ListBuffer[Int]()
+      val blues = ListBuffer[Int]()
+
+      for(c <- colors) {
+         val replaced = c.replace("#", "")
+         val splitted = replaced.split("")
+         val red = this.convertHexStringToInt(splitted(0)+splitted(1))
+         val green = this.convertHexStringToInt(splitted(2)+splitted(3))
+         val blue = this.convertHexStringToInt(splitted(4)+splitted(5))
+         reds.addOne(red)
+         greens.addOne(green)
+         blues.addOne(blue)
       }
 
-      val rI = r.map(this.convertHexStringToInt)
-      val gI = g.map(this.convertHexStringToInt)
-      val bI = b.map(this.convertHexStringToInt)
+      result.addOne(reds.toList)
+      result.addOne(greens.toList)
+      result.addOne(blues.toList)
 
-      List(rI.toList, gI.toList, bI.toList)
+      result.toList
    }
 
    def double_to_hex_string(rgb_double: List[Double]): String = {

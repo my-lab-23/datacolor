@@ -16,9 +16,9 @@ object MyRGB {
    }
 
    def get_rbg_list(list_len: Int): List[String] = {
-      var rbg_list_buffer = ListBuffer[String]()
+      val rbg_list_buffer = ListBuffer[String]()
 
-      for( i <- 1 to list_len) {
+      for(_ <- 1 to list_len) {
          rbg_list_buffer += this.get_rbg_string
       }
 
@@ -39,24 +39,36 @@ object MyRGB {
 
    //
 
+   private implicit class ExtendedInt(i: Int) {
+      def pow(esponente: Int): Int = {
+         Math.pow(i.toDouble, esponente.toDouble).toInt
+      }
+
+      def sqrt(): Int = {
+         Math.sqrt(i.toDouble).toInt
+      }
+   }
+
    // AverageColor = sqrt((R1^2+R2^2)/2),sqrt((G1^2+G2^2)/2),sqrt((B1^2+B2^2)/2)
    def average_rgb_list(rgb_list: List[String]): String = {
-      val rgb_int_list = MyRGBAux.split_hex_to_int(rgb_list)
+      val colors = MyRGBAux.split_hex_to_int(rgb_list)
 
-      val red_DL: List[Double] = rgb_int_list.head.map(_.toDouble)
-      val green_DL: List[Double] = rgb_int_list(1).map(_.toDouble)
-      val blue_DL: List[Double] = rgb_int_list(2).map(_.toDouble)
+      val powered_colors = ListBuffer[List[Int]]()
 
-      val red_DLPS = red_DL.map(Math.pow(_,2)).sum/red_DL.length
-      val green_DLPS = green_DL.map(Math.pow(_,2)).sum/green_DL.length
-      val blue_DLPS = blue_DL.map(Math.pow(_,2)).sum/blue_DL.length
+      for(c <- colors) {
+         val powered = c.map { _.pow(2) }
+         powered_colors.addOne(powered)
+      }
 
-      val res1 = Math.sqrt(red_DLPS)
-      val res2 = Math.sqrt(green_DLPS)
-      val res3 = Math.sqrt(blue_DLPS)
+      val sum1 = powered_colors.head.sum/2
+      val sum2 = powered_colors(1).sum/2
+      val sum3 = powered_colors(2).sum/2
 
-      val result = MyRGBAux.double_to_hex_string(List(res1, res2, res3))
-      result
+      val res1 = MyRGBAux.convertIntToHexString(sum1.sqrt())
+      val res2 = MyRGBAux.convertIntToHexString(sum2.sqrt())
+      val res3 = MyRGBAux.convertIntToHexString(sum3.sqrt())
+
+      s"#$res1$res2$res3"
    }
 
    //
@@ -65,7 +77,7 @@ object MyRGB {
       val rgb_list_csv = MyUtility.read_file(s"$path/rgb.txt")
       val rgb_list_last9 = rgb_list_csv.take(9)
 
-      var splitted = ListBuffer[List[String]]()
+      val splitted = ListBuffer[List[String]]()
 
       for(l <- rgb_list_last9) {
          splitted += l.split(",").toList
@@ -75,8 +87,8 @@ object MyRGB {
          println(l)
       }
 
-      var pari = ListBuffer[String]()
-      var dispari = ListBuffer[String]()
+      val pari = ListBuffer[String]()
+      val dispari = ListBuffer[String]()
 
       for(l <- splitted) {
          if(l.nonEmpty) {
@@ -94,7 +106,7 @@ object MyRGB {
    def final_combo(rgb_list: List[String]): List[String] = {
       val ril = MyRGBAux.split_hex_to_int(rgb_list)
 
-      val l0 = ril(0)
+      val l0 = ril.head
       val l1 = ril(1)
       val l2 = ril(2)
 
