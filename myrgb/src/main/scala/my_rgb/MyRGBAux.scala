@@ -52,9 +52,10 @@ object MyRGBAux {
    }
 
    def int_to_hex_string(rgb_int: List[Int]): String = {
-      val resR = this.convertIntToHexString(rgb_int.head).replace("0", "00")
-      val resG = this.convertIntToHexString(rgb_int(1)).replace("0", "00")
-      val resB = this.convertIntToHexString(rgb_int(2)).replace("0", "00")
+
+      val resR = this.convertIntToHexString(rgb_int.head)
+      val resG = this.convertIntToHexString(rgb_int(1))
+      val resB = this.convertIntToHexString(rgb_int(2))
 
       val result = s"#$resR$resG$resB"
       result

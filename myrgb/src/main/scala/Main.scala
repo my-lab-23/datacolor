@@ -7,6 +7,7 @@ object Main {
    def main(args: Array[String]): Unit = {
 
       val avg_combo = MyRGB.average_combo()
-      println(avg_combo)
+      val fin_combo = MyRGB.final_combo(avg_combo)
+      println(fin_combo)
    }
 }

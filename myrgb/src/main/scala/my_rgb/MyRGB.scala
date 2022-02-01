@@ -85,10 +85,6 @@ object MyRGB {
          splitted += l.split(",").toList
       }
 
-      for(l <- splitted) {
-         //println(l)
-      }
-
       val pari = ListBuffer[String]()
       val dispari = ListBuffer[String]()
 
