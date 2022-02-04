@@ -30,4 +30,10 @@ class MyRGBTest extends AnyFlatSpec with should.Matchers {
       val colors_average = MyRGB.average_rgb_list(List("#020202", "#030303", "#040404", "#050505"))
       colors_average should be ("#030303")
    }
+
+   it should "calculate correct final combo" in {
+      val avg_combo = MyRGB.average_combo()
+      val fin_combo = MyRGB.final_combo(avg_combo)
+      fin_combo should be (List("#84007c", "#00979f"))
+   }
 }

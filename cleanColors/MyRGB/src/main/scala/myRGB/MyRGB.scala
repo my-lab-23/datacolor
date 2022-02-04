@@ -32,4 +32,8 @@ object MyRGB {
       val mode = true
       MyUtility.writeFile(rgbCsv, s"$path/rgb.txt", mode)
    }
+
+   def readRGB(): java.util.List[String] = {
+      MyUtility.readFile(s"$path/rgb.txt").asJava
+   }
 }

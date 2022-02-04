@@ -14,9 +14,7 @@ class ColorPool {
         MyRGB.saveRGB(temp)
     }
 
-    fun getSavedColorPool(nColor: Int): ColorPool {
-        TODO()
-    }
+    //
 
     fun averageColorPool(): Color {
         val red = (sumPow2("RED")/colors.size).sqrt()
@@ -29,8 +27,6 @@ class ColorPool {
 
         return Color("#$redHex$greenHex$blueHex")
     }
-
-    //
 
     private fun Int.sqrt(): Int {
         return kotlin.math.sqrt(this.toDouble()).toInt()
@@ -59,7 +55,56 @@ class ColorPool {
         return colors[i]
     }
 
+    fun getSize(): Int {
+        return  colors.size
+    }
+
     fun addColor(c: Color) {
        colors.add(c)
+    }
+
+    //
+
+    fun getOddsElements(): ColorPool {
+        return getElements(0)
+    }
+
+    fun getEvensElements(): ColorPool {
+        return getElements(1)
+    }
+
+    private fun getElements(j: Int): ColorPool {
+        val temp = ColorPool()
+        for (i in j until colors.size step 2) {
+            temp.addColor(Color(colors[i].rgb))
+        }
+        return temp
+    }
+
+    //
+
+    fun replaceMinWithZero(): ColorPool {
+        val color1 = this.getColor(0)
+        val color2 = this.getColor(1)
+
+        val newCP = ColorPool()
+
+        val min1 = listOf(color1.red, color1.green, color1.blue).minOrNull()!!
+        newCP.addColor(Color(f(min1, 0)))
+
+        val min2 = listOf(color2.red, color2.green, color2.blue).minOrNull()!!
+        newCP.addColor(Color(f(min2, 1)))
+
+        return newCP
+    }
+
+    private fun f(absoluteMin: Int, i: Int): String {
+        val c = mutableListOf("#", "00", "00", "00")
+
+        if(colors[i].red != absoluteMin)   { c[1] = colors[i].redHex  }
+        if(colors[i].green != absoluteMin) { c[2] = colors[i].greenHex }
+        if(colors[i].blue != absoluteMin)  { c[3] = colors[i].blueHex }
+
+        return c.joinToString("")
     }
 }
